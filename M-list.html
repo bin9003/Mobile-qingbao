@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>中国情报网</title>
+    <script src="jquery-1.11.1.js"></script>
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <li><a href="">问答</a></li>
+            <li><a href="">专题</a></li>
+            <li><a href="">咨询</a></li>
+            <li><a href="">活动</a></li>
+            <li><a href="">文库</a></li>
+            <li><a href=""><img src="" alt=""></a></li>
+        </ul>
+    </div>
+    <div>
+        <input class="btn" type="button" date-val="显示" value="显示">
+        <div class="show" style="display: none;">
+            这是内容!<br />
+            这是内容!<br />
+            这是内容!<br />
+            这是内容!<br />
+        </div>
+    </div>
+
+    <div>
+        <input class="btn2" type="button" date-val="显示" value="显示">
+        <div class="show2" style="display: none;">
+            这是内容!<br />
+            这是内容!<br />
+            这是内容!<br />
+            这是内容!<br />
+        </div>
+    </div>
+    <script>
+        function fn(Sclass, Sclass2){
+            $(Sclass).click(function () {
+                var This = this;
+                $(Sclass2).slideToggle(function () {
+                    if (this.onoff){
+                        $(This).val( $(This).attr("date-val") );
+                    }else {
+                        $(This).val( "收起" );
+                    }
+                    this.onoff = !this.onoff;
+                })
+            })
+        }
+
+        fn(".btn", ".show");
+        fn(".btn2", ".show2");
+
+    </script>
+</body>
+</html>
