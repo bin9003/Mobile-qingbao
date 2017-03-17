@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.11.1.js"></script>
+    <style>
+        p {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<a class="Click" data-type="images" href="javascript:void(0);">点击我1</a>
+<a class="Click" data-type="images" href="javascript:void(0);">点击我2</a>
+<a class="Click" data-type="images" href="javascript:void(0);">点击我3</a>
+<a class="Click" data-type="images" href="javascript:void(0);">点击我4</a>
+<a class="Click" data-type="images" href="javascript:void(0);">点击我5</a>
+<p style="display: block;">1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<script type="text/javascript">
+//    $('.Click').click(function () {
+//        var dataType = $(this).attr("data-type");
+//        if (!dataType) {
+//            return 0;
+//        }
+//        $.ajax({
+//            url:'php/val.php',
+//            type:'POST',
+//            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+//            data:{ pageType: dataType },
+//            success:function(datas){ //ajax.responsText
+//                $('.Click').after('<div>' + datas + '</div>');
+//            },
+//            error:function(a){
+//
+//            },
+//            complete:function () {
+//
+//            }
+//            //async:true
+//        });
+//    });
+    
+    function Options () {
+        this.pageType = $(".Click").attr("data-type"); // 获取元素属性的值 以什么方式布局
+        this.C_ele = $('.Click'); // 被点击的所有元素
+    }
+    Options.prototype.Click = function () {
+        var This = this;
+        this.C_ele.click(function () {
+            // 点击元素 让对应p标签显示 其他p标签隐藏
+            $('p').eq( $(This.C_ele).index(this) ).css('display', 'block').siblings('p').css('display','none');
+            $('p').eq( $(This.C_ele).index(this) );
+            if (This.pageType) {
+                This.Ajax();
+            }
+        });
+    }
+    Options.prototype.addEle = function () {
+
+    }
+    Options.prototype.Ajax = function () {
+        var This = this;
+        console.log(This.pageType);
+        $.ajax({
+            url:'php/val.php',
+            type:'POST',
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            content: This.C_ele,
+            data:{ pageType: This.pageType },
+            success:function(datas){ //ajax.responsText
+//                This.C_ele.after('<div>' + datas + '</div>');
+            },
+            error:function(a){
+
+            },
+            complete:function () { // 无论成功失败都会调用这个函数
+
+            }
+            //async:true
+        });
+    }
+    var Options = new Options();
+    Options.Click();
+</script>
+</body>
+</html>
